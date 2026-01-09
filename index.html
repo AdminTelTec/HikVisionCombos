@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Ventas - CCTV</title>
+    <!-- Tailwind CSS para diseño rápido y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Iconos de Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Fuentes de Google -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        h1,
+        h2,
+        h3,
+        .price-tag {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        /* Estilos específicos para impresión */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .print-container {
+                box-shadow: none !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .card {
+                border: 1px solid #ddd;
+                break-inside: avoid;
+                /* Evita que las tarjetas se corten entre páginas */
+            }
+
+            .bg-slate-900 {
+                background-color: white !important;
+                color: black !important;
+            }
+
+            .text-white {
+                color: black !important;
+            }
+
+            .badge-pro {
+                border: 1px solid black;
+                color: black !important;
+            }
+
+            /* Ocultar costos al imprimir - CRUCIAL */
+            .dealer-cost {
+                display: none !important;
+            }
+
+            /* Mantenemos visible el desglose de SKUs en impresión pequeña para que sirva de guía de picking, 
+               o puedes agregar .no-print a la clase .sku-list si prefieres que no salga al cliente */
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8">
+
+    <!-- Botones de Acción (No salen en impresión) -->
+    <div class="max-w-5xl mx-auto mb-6 flex justify-between items-center no-print">
+        <div class="text-sm text-gray-500 italic">
+            <i data-lucide="eye" class="inline w-4 h-4"></i> Vista Vendedor (Costos Visibles)
+        </div>
+        <button onclick="window.print()"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg flex items-center gap-2 transition-all">
+            <i data-lucide="printer"></i> Imprimir Menú (Cliente)
+        </button>
+    </div>
+
+    <!-- Contenedor Principal (Hoja del Menú) -->
+    <div class="print-container max-w-5xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden">
+
+        <!-- Encabezado -->
+        <header class="bg-slate-900 text-white p-8 text-center border-b-8 border-red-600">
+            <img src="Teltec.webp" alt="Logo" class="h-24 mx-auto mb-4 bg-white p-2 rounded-lg">
+            <h1 class="text-4xl md:text-5xl uppercase tracking-wider mb-2">Soluciones de Seguridad</h1>
+            <p class="text-slate-300 text-lg">Lista de Precios Oficial & Guía de Venta</p>
+        </header>
+
+        <div class="p-8">
+
+            <!-- SECCIÓN 1: ENTRADAS (LÍNEA ECONÓMICA) -->
+            <div class="mb-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-blue-600 text-white p-2 rounded-lg"><i data-lucide="package-check"></i></span>
+                    <h2 class="text-3xl text-slate-800 uppercase">1. Combos "Todo Incluido" (HiLook)</h2>
+                </div>
+                <p class="mb-4 text-gray-600 border-l-4 border-blue-500 pl-3 italic">
+                    <span class="font-bold">Estrategia:</span> Ideal para competir por precio. El cliente busca "lo más
+                    barato". <br>
+                    <span class="text-xs">Incluye: Cámaras, DVR, Disco 500GB, Cables y Fuente.</span>
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- CMB101 -->
+                    <div
+                        class="card bg-white border border-slate-200 rounded-lg p-5 hover:shadow-lg transition-shadow relative overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                            BEST SELLER</div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900">Kit Inicio 2 Cámaras (Bala)</h3>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">SKU: CMB101</span>
+                                <!-- COSTO AGREGADO -->
+                                <div
+                                    class="dealer-cost mt-1 text-xs text-gray-400 font-mono border border-gray-200 inline-block px-1 rounded bg-gray-50">
+                                    Costo: Q636.00
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-3xl font-bold text-red-600 price-tag">Q830</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Para exterior. Sistema básico completo, instalar y listo.
+                        </p>
+                        <ul class="text-xs text-slate-500 space-y-1">
+                            <li class="flex gap-2"><i data-lucide="hard-drive" class="w-4 h-4"></i> Disco 500GB (Básico)
+                            </li>
+                            <li class="flex gap-2"><i data-lucide="video" class="w-4 h-4"></i> Visión Nocturna Estándar
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- CMB102 -->
+                    <div class="card bg-white border border-slate-200 rounded-lg p-5 hover:shadow-lg transition-shadow">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900">Kit Inicio 2 Cámaras (Domo)</h3>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">SKU: CMB102</span>
+                                <!-- COSTO AGREGADO -->
+                                <div
+                                    class="dealer-cost mt-1 text-xs text-gray-400 font-mono border border-gray-200 inline-block px-1 rounded bg-gray-50">
+                                    Costo: Q636.00
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-3xl font-bold text-red-600 price-tag">Q830</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Para interior. Diseño estético y discreto.</p>
+                        <ul class="text-xs text-slate-500 space-y-1">
+                            <li class="flex gap-2"><i data-lucide="hard-drive" class="w-4 h-4"></i> Disco 500GB (Básico)
+                            </li>
+                            <li class="flex gap-2"><i data-lucide="home" class="w-4 h-4"></i> Ideal Oficinas/Casas</li>
+                        </ul>
+                    </div>
+
+                    <!-- CMB103 -->
+                    <div class="card bg-white border border-slate-200 rounded-lg p-5 hover:shadow-lg transition-shadow">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900">Kit Negocio 6 Cámaras (Bala)</h3>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">SKU: CMB103</span>
+                                <!-- COSTO AGREGADO -->
+                                <div
+                                    class="dealer-cost mt-1 text-xs text-gray-400 font-mono border border-gray-200 inline-block px-1 rounded bg-gray-50">
+                                    Costo: Q1,586.00
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-3xl font-bold text-red-600 price-tag">Q2,065</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Cobertura amplia para tiendas o perímetro.</p>
+                        <ul class="text-xs text-slate-500 space-y-1">
+                            <li class="flex gap-2"><i data-lucide="server" class="w-4 h-4"></i> DVR 16 Canales
+                                (Expandible)</li>
+                            <li class="flex gap-2"><i data-lucide="hard-drive" class="w-4 h-4"></i> Disco 500GB</li>
+                        </ul>
+                    </div>
+
+                    <!-- CMB106 -->
+                    <div class="card bg-white border border-slate-200 rounded-lg p-5 hover:shadow-lg transition-shadow">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900">Kit Negocio 8 Cámaras (Bala)</h3>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">SKU: CMB106</span>
+                                <!-- COSTO AGREGADO -->
+                                <div
+                                    class="dealer-cost mt-1 text-xs text-gray-400 font-mono border border-gray-200 inline-block px-1 rounded bg-gray-50">
+                                    Costo: Q1,798.00
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-3xl font-bold text-red-600 price-tag">Q2,340</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Seguridad total. El mejor precio por cámara.</p>
+                        <ul class="text-xs text-slate-500 space-y-1">
+                            <li class="flex gap-2"><i data-lucide="server" class="w-4 h-4"></i> DVR 16 Canales
+                                (Expandible)</li>
+                            <li class="flex gap-2"><i data-lucide="hard-drive" class="w-4 h-4"></i> Disco 500GB</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-t-2 border-dashed border-gray-300 my-8">
+
+            <!-- SECCIÓN 2: PLATOS FUERTES (LÍNEA PROFESIONAL) -->
+            <div class="mb-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-slate-900 text-white p-2 rounded-lg"><i data-lucide="shield-check"></i></span>
+                    <h2 class="text-3xl text-slate-800 uppercase">2. Línea Profesional (Hikvision + IA)</h2>
+                </div>
+                <div class="bg-orange-50 border-l-4 border-orange-500 p-4 mb-6">
+                    <p class="text-sm text-orange-800 font-bold">
+                        <i data-lucide="zap" class="inline w-4 h-4"></i> Upselling:
+                        <span class="font-normal">Ofrecer al cliente que busca calidad de imagen, mejor visión nocturna
+                            y detección inteligente de humanos (cero falsas alarmas).</span>
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- KIT PRO 4 -->
+                    <div
+                        class="card bg-slate-50 border-2 border-slate-900 rounded-xl p-6 relative shadow-xl transform transition hover:-translate-y-1">
+                        <div
+                            class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-900 text-white px-4 py-1 rounded-full text-sm font-bold shadow badge-pro">
+                            RECOMENDADO
+                        </div>
+                        <div class="flex justify-between items-start mb-4 mt-2">
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-900">Pack Pro 4 (IA)</h3>
+                                <span class="text-xs font-mono text-slate-500">SKU: KIT-PRO-4</span>
+                                <br>
+                                <!-- COSTO AGREGADO -->
+                                <div
+                                    class="dealer-cost mt-1 text-xs text-gray-500 font-mono border border-gray-300 inline-block px-1 rounded bg-gray-100">
+                                    Costo: Q1,314.00
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-4xl font-bold text-slate-900 price-tag">Q1,655</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-xs bg-white border border-gray-300 px-2 py-1 rounded">2 Balas</span>
+                            <span class="text-xs bg-white border border-gray-300 px-2 py-1 rounded">2 Domos</span>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-slate-700 mb-4">
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                                    class="text-green-600 w-4 h-4"></i> <strong>DVR con Inteligencia Artificial</strong>
+                            </li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                                    class="text-green-600 w-4 h-4"></i> <strong>Disco Duro 1TB</strong> (Doble
+                                Grabación)</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                                    class="text-green-600 w-4 h-4"></i> <strong>Tecnología EXIR</strong> (Visión
+                                Nocturna Pro)</li>
+                        </ul>
+
+                        <!-- DESGLOSE DE SKUS PARA FACTURACION -->
+                        <div
+                            class="bg-yellow-50 border border-yellow-200 rounded p-3 mt-4 text-xs font-mono text-slate-700 sku-list">
+                            <div
+                                class="flex items-center gap-2 font-bold mb-2 text-yellow-800 uppercase border-b border-yellow-200 pb-1">
+                                <i data-lucide="clipboard-list" class="w-3 h-3"></i> Desglose para Facturar (SKUs)
+                            </div>
+                            <div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1">
+                                <span class="font-bold">1x</span> <span>DS-7104HGHI-M1 <span
+                                        class="text-gray-400">(DVR)</span></span>
+                                <span class="font-bold">2x</span> <span>DS-2CE16D0T-EXIPF <span
+                                        class="text-gray-400">(Bala)</span></span>
+                                <span class="font-bold">2x</span> <span>DS-2CE76D0T-EXIPF <span
+                                        class="text-gray-400">(Domo)</span></span>
+                                <span class="font-bold">1x</span> <span>DD-1TB <span
+                                        class="text-gray-400">(Disco)</span></span>
+                                <span class="font-bold">1x</span> <span>U-5-I-PRISMA-100MTS <span
+                                        class="text-gray-400">(Cable)</span></span>
+                                <span class="font-bold">4x</span> <span>TRANS-12V-1AMP</span>
+                                <span class="font-bold">4x</span> <span>VID-BALUN-5MPX</span>
+                                <span class="font-bold">4x</span> <span>CAJA-100X100X70-GEN</span>
+                                <span class="font-bold">4x</span> <span>CONEC-MACHO + HEMBRA</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- KIT PRO 8 -->
+                    <div
+                        class="card bg-white border border-slate-300 rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
+                        <div class="flex justify-between items-start mb-4 mt-2">
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-900">Pack Pro 8 (IA)</h3>
+                                <span class="text-xs font-mono text-slate-500">SKU: KIT-PRO-8</span>
+                                <br>
+                                <!-- COSTO AGREGADO -->
+                                <div
+                                    class="dealer-cost mt-1 text-xs text-gray-500 font-mono border border-gray-300 inline-block px-1 rounded bg-gray-100">
+                                    Costo: Q1,812.00
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-4xl font-bold text-slate-900 price-tag">Q2,685</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-xs bg-slate-100 border border-gray-300 px-2 py-1 rounded">4 Balas</span>
+                            <span class="text-xs bg-slate-100 border border-gray-300 px-2 py-1 rounded">4 Domos</span>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-slate-700 mb-4">
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                                    class="text-green-600 w-4 h-4"></i> <strong>DVR 8ch con IA</strong> (Detección
+                                Humanos)</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                                    class="text-green-600 w-4 h-4"></i> <strong>Disco Duro 1TB</strong></li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                                    class="text-green-600 w-4 h-4"></i> Cámaras Hikvision EXIR</li>
+                        </ul>
+
+                        <!-- DESGLOSE DE SKUS PARA FACTURACION -->
+                        <div
+                            class="bg-yellow-50 border border-yellow-200 rounded p-3 mt-4 text-xs font-mono text-slate-700 sku-list">
+                            <div
+                                class="flex items-center gap-2 font-bold mb-2 text-yellow-800 uppercase border-b border-yellow-200 pb-1">
+                                <i data-lucide="clipboard-list" class="w-3 h-3"></i> Desglose para Facturar (SKUs)
+                            </div>
+                            <div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1">
+                                <span class="font-bold">1x</span> <span>DS-7108HGHI-M1 <span
+                                        class="text-gray-400">(DVR)</span></span>
+                                <span class="font-bold">4x</span> <span>DS-2CE16D0T-EXIPF <span
+                                        class="text-gray-400">(Bala)</span></span>
+                                <span class="font-bold">4x</span> <span>DS-2CE76D0T-EXIPF <span
+                                        class="text-gray-400">(Domo)</span></span>
+                                <span class="font-bold">1x</span> <span>DD-1TB <span
+                                        class="text-gray-400">(Disco)</span></span>
+                                <span class="font-bold">2x</span> <span>U-5-I-PRISMA-100MTS <span
+                                        class="text-gray-400">(Cable)</span></span>
+                                <span class="font-bold">8x</span> <span>TRANS-12V-1AMP</span>
+                                <span class="font-bold">8x</span> <span>VID-BALUN-5MPX</span>
+                                <span class="font-bold">8x</span> <span>CAJA-100X100X70-GEN</span>
+                                <span class="font-bold">8x</span> <span>CONEC-MACHO + HEMBRA</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3: GUARNICIONES (ACCESORIOS) -->
+            <div class="bg-gray-100 rounded-xl p-6 border border-gray-200 break-inside-avoid">
+                <h2 class="text-2xl text-slate-800 uppercase mb-4 flex items-center gap-2">
+                    <i data-lucide="plus-circle" class="w-6 h-6"></i> A la Carta: Accesorios y Extras
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Item -->
+                    <div class="flex justify-between items-center bg-white p-3 rounded border border-gray-300">
+                        <div>
+                            <p class="font-bold text-sm">Mejora a Disco 1TB</p>
+                            <p class="text-xs text-gray-500">SKU: DD-1TB</p>
+                        </div>
+                        <span class="font-bold text-slate-900">Q370.00</span>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex justify-between items-center bg-white p-3 rounded border border-gray-300">
+                        <div>
+                            <p class="font-bold text-sm">Bobina UTP 100m</p>
+                            <p class="text-xs text-gray-500">SKU: U-5-I-PRISMA</p>
+                        </div>
+                        <span class="font-bold text-slate-900">Q125.00</span>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex justify-between items-center bg-white p-3 rounded border border-gray-300">
+                        <div>
+                            <p class="font-bold text-sm">Par Video Balun 5MP</p>
+                            <p class="text-xs text-gray-500">SKU: VID-BALUN</p>
+                        </div>
+                        <span class="font-bold text-slate-900">Q18.00</span>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex justify-between items-center bg-white p-3 rounded border border-gray-300">
+                        <div>
+                            <p class="font-bold text-sm">Fuente 12V 1Amp</p>
+                            <p class="text-xs text-gray-500">SKU: TRANS-12V</p>
+                        </div>
+                        <span class="font-bold text-slate-900">Q18.00</span>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex justify-between items-center bg-white p-3 rounded border border-gray-300">
+                        <div>
+                            <p class="font-bold text-sm">Caja Plástica Registro</p>
+                            <p class="text-xs text-gray-500">SKU: CAJA-GEN</p>
+                        </div>
+                        <span class="font-bold text-slate-900">Q16.00</span>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex justify-between items-center bg-white p-3 rounded border border-gray-300">
+                        <div>
+                            <p class="font-bold text-sm">Conectores DC (Par)</p>
+                            <p class="text-xs text-gray-500">Macho/Hembra</p>
+                        </div>
+                        <span class="font-bold text-slate-900">Q5.00</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-slate-900 text-slate-400 p-6 text-center text-xs border-t border-slate-700">
+            <div class="flex justify-center gap-8 mb-2 font-bold uppercase tracking-wider">
+                <span><i data-lucide="check"></i> Garantía 1 Año</span>
+                <span><i data-lucide="check"></i> Soporte Técnico</span>
+                <span><i data-lucide="check"></i> Factura Incluida</span>
+            </div>
+            <p>Precios sujetos a cambios sin previo aviso. Imágenes con fines ilustrativos.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
